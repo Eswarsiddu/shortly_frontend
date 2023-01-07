@@ -1,0 +1,73 @@
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  font-family: "Pacifico", cursive;
+  flex: 1;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0.5rem 0;
+}
+
+.title p {
+  display: inline-block;
+  margin: 0;
+  user-select: none;
+  background-image: linear-gradient(to right, #392fa4, #c21ee7);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.title p:hover {
+  cursor: pointer;
+}
+
+.mobile {
+  text-align: center;
+}
+
+.username {
+  background-color: red;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+}
+.username p {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+nav a {
+  color: black;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+.signUp {
+  background-color: rgba(1, 100, 150, 0.7);
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.4rem 1rem;
+}
+
+.signUp:hover {
+  color: white;
+  background-color: rgba(1, 100, 150, 1);
+}
+
+@media (min-width: 640px) {
+  .mobile {
+    text-align: left;
+  }
+}
