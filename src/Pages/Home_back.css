@@ -1,15 +1,17 @@
 .intro {
   position: relative;
-  margin-top: 2rem;
+  height: 95vh;
+  background-color: #ecf0f3;
+  z-index: 3;
+  padding-left: 5rem;
   display: flex;
-  gap: 2.5rem;
-  height: 75vh;
-  flex-grow: 1;
   flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
 }
 
 .intro > p {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 700;
   color: #456077;
   margin: 0;
@@ -17,20 +19,12 @@
 
 .browser-bar {
   background-color: #e2e8ed;
-  width: 90%;
-  margin: 0 auto;
-  padding: 0.5rem 0.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  border-radius: 0.5rem;
-}
-
-.controls {
+  border-radius: 1.5rem;
+  width: 85%;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  /* padding-left: 0.8rem; */
+  padding: 0 3rem;
+  gap: 2rem;
 }
 
 .control-buttons {
@@ -56,37 +50,39 @@
 }
 
 .redo-undo {
-  display: none;
-}
-
-/* .redo-undo {
   display: flex;
   gap: 0.8rem;
-  align-items: center;
 }
 
 .redo-undo i {
   background-color: #f1f1f1;
-} */
+  padding: 0.4rem;
+  border-radius: 5px;
+}
 
 .url-block {
-  display: flex;
-  border-radius: 0.5rem;
-  gap: 0.3rem;
-  padding: 0.5rem 0.2rem;
   background-color: white;
+  padding: 0.5rem;
+  display: flex;
+  margin: 0.5rem 0;
+  gap: 0.5rem;
+  border-radius: 0.8rem;
+  align-items: center;
+  user-select: none;
 }
 
 .url-block p {
   color: #7e7e7e;
   margin: 0;
-  line-height: 1.5;
-  text-overflow: ellipsis;
 }
 
 .fa-scissors {
   font-size: larger;
   color: #636363;
+}
+
+.fa-check {
+  color: #39b820;
 }
 
 .trailing-part {
@@ -106,16 +102,6 @@
   border-radius: 0.5rem;
 }
 
-.get-started:hover,
-.get-started:focus {
+.get-started:hover {
   background-color: rgba(1, 100, 150, 1);
-}
-
-#intro-pos {
-  position: fixed;
-  left: 1rem;
-  top: 1rem;
-  z-index: 3;
-  background-color: white;
-  font-size: small !important;
 }

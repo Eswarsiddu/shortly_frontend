@@ -31,7 +31,7 @@ export function NavBar({ onlyTitle = false }) {
             //TODO:REMOVE in production
             */}
         <p id="position center">
-          w:{window.innerWidth} <br /> h:{window.innerHeight}
+          sw:{window.innerWidth} <br /> sh:{window.innerHeight}
         </p>
         {currentUser && (
           <div className="username">
