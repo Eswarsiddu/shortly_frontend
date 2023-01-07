@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./NavBar.css";
 export function NavBar({ onlyTitle = false }) {
   const { currentUser, logout } = useAuth();
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
   const navigate = useNavigate();
   if (onlyTitle)
     return (
@@ -15,7 +18,15 @@ export function NavBar({ onlyTitle = false }) {
             //TODO:REMOVE in production
             */}
           <p id="position">
-            w:{window.innerWidth} <br /> h:{window.innerHeight}
+            <button
+              onClick={() => {
+                setWidth(window.innerWidth);
+                setHeight(window.innerHeight);
+              }}
+            >
+              change
+            </button>
+            w:{width} h:{height}
           </p>
         </nav>
         <Outlet />
@@ -30,8 +41,17 @@ export function NavBar({ onlyTitle = false }) {
         {/*
             //TODO:REMOVE in production
             */}
-        <p id="position center">
-          sw:{window.innerWidth} <br /> sh:{window.innerHeight}
+        <p id="position">
+          <button
+            onClick={() => {
+              setWidth(window.innerWidth);
+              setHeight(window.innerHeight);
+            }}
+          >
+            change
+          </button>
+          <br />
+          w:{width} <br /> h:{height}
         </p>
         {currentUser && (
           <div className="username">
