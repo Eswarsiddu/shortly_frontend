@@ -2,27 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 function Home() {
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
   return (
     <div className="intro">
-      {/*
-      //TODO: remove after designing
-      */}
-      <p id="intro-pos">
-        <button
-          onClick={() => {
-            setHeight(document.querySelector(".intro")!.clientWidth);
-            setWidth(document.querySelector(".intro")!.clientHeight);
-          }}
-        >
-          getSize
-        </button>
-        <br />
-        w:{height}
-        <br />
-        h:{width}
-      </p>
       <p>The shorter,</p>
       <div className="browser-bar">
         <div className="controls">

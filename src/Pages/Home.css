@@ -5,7 +5,6 @@
   gap: 2.5rem;
   height: 75vh;
   flex-grow: 1;
-  /* margin: 0 auto; */
   flex-direction: column;
 }
 
@@ -19,7 +18,6 @@
 .browser-bar {
   background-color: #e2e8ed;
   width: 90%;
-  /* margin: 0 auto; */
   padding: 0.5rem 0.8rem;
   display: flex;
   flex-direction: column;
@@ -31,7 +29,6 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  /* padding-left: 0.8rem; */
 }
 
 .control-buttons {
