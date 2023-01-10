@@ -2,7 +2,6 @@ body {
   height: 100vh;
   padding: 0;
   margin: 0;
-  /* background-color: red; */
 }
 #root {
   padding: 0 1rem;
@@ -12,11 +11,28 @@ body {
 
 #position {
   position: fixed;
-  right: 1rem;
+  right: 3rem;
   top: 0;
   font-weight: 700;
 }
 
 .center {
   right: 50%;
+}
+
+button {
+  text-transform: capitalize;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.back {
+  text-decoration: none;
+  color: black;
+}
+
+.back i {
+  padding-right: 0.3rem;
 }

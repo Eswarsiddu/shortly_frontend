@@ -36,7 +36,17 @@ export function NavBar({ onlyTitle = false }) {
     <>
       <nav>
         <div className="title">
-          <p>Shortly</p>
+          <p
+            onClick={() => {
+              if (currentUser) {
+                if (location.pathname != "/dashboard") {
+                  navigate("/dashboard");
+                }
+              }
+            }}
+          >
+            Shortly
+          </p>
         </div>
         {/*
             //TODO:REMOVE in production
@@ -55,7 +65,7 @@ export function NavBar({ onlyTitle = false }) {
         </p>
         {currentUser && (
           <div className="username">
-            <span>{currentUser?.email?.at(0)}</span>
+            <span>{currentUser?.displayName?.at(0)}</span>
           </div>
         )}
         {currentUser && location.pathname != "/profile" && (

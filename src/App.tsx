@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./Pages/Home";
 import { Login } from "./Pages/Login";
@@ -6,21 +7,36 @@ import { SignUp } from "./Pages/SignUp";
 import { Dashboard } from "./Pages/Dashboard";
 import { NotFoundPage } from "./Pages/NotFoundPage";
 import { ForgetPassword } from "./Pages/ForgetPassword";
-import { ResetPassword } from "./Pages/ResetPassword";
 import { NavBar } from "./components/NavBar";
-import { Profile } from "./Pages/profile";
+import { Profile } from "./Pages/Profile";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
+import { FirebaseActions } from "./Pages/FirebaseActions";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
       <Routes>
         <Route element={<NavBar onlyTitle={true} />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
+          <Route
+            path="/login"
+            element={
+              <AuthenticatedRoute>
+                <Login />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route
+            path="/signUp"
+            element={
+              <AuthenticatedRoute>
+                <SignUp />
+              </AuthenticatedRoute>
+            }
+          />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
-          <Route path="/reset" element={<ResetPassword />} />
+          <Route path="/firebaseActions" element={<FirebaseActions />} />
         </Route>
         <Route element={<NavBar />}>
           <Route path="*" element={<NotFoundPage />} />
@@ -40,10 +56,17 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
+      <ToastContainer />
     </>
   );
 }

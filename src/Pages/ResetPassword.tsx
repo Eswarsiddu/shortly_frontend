@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export function ResetPassword() {
+export function ResetPassword({ obbCode }: any) {
   const [password, setPassword] = useState("");
   const [cnfPassword, setCnfPassword] = useState("");
   const { resetPassword } = useAuth();
   const navigate = useNavigate();
-  const [searchparams, setSearchParams] = useSearchParams();
-  const obbCode = searchparams.get("oobCode");
   return (
     <>
       <div>

@@ -11,6 +11,10 @@ import {
   confirmPasswordReset,
   sendEmailVerification,
   UserCredential,
+  updateProfile,
+  updateEmail,
+  updatePassword,
+  applyActionCode,
   User,
 } from "firebase/auth";
 
@@ -18,22 +22,35 @@ interface authInterface {
   currentUser: User | null | undefined;
   signInWithGoogle: () => Promise<UserCredential | void>;
   login: (email: string, password: string) => Promise<UserCredential | void>;
-  register: (email: string, password: string) => Promise<UserCredential | void>;
+  register: (
+    email: string,
+    password: string,
+    fullName: string
+  ) => Promise<UserCredential | void>;
   logout: () => Promise<void>;
+  updateDisplayName: (fullName: string) => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
   resetPassword: (oobCode: string, newPassword: string) => Promise<void>;
   verifyEmail: () => Promise<void>;
+  updateEmailAddress: (email: string) => Promise<void>;
+  verifyEmailAddress: (obbCode: string) => Promise<void>;
+  _updatePassword: (newPassword: string) => Promise<void>;
 }
 
 const AuthContext = createContext<authInterface>({
   currentUser: undefined,
   signInWithGoogle: () => Promise.resolve(),
   login: (email: string, password: string) => Promise.resolve(),
-  register: (email: string, password: string) => Promise.resolve(),
+  register: (email: string, password: string, fullName: string) =>
+    Promise.resolve(),
   logout: () => Promise.resolve(),
+  updateDisplayName: (fullName: string) => Promise.resolve(),
   forgotPassword: (email: string) => Promise.resolve(),
   resetPassword: (oobCode: string, newPassword: string) => Promise.resolve(),
   verifyEmail: () => Promise.resolve(),
+  updateEmailAddress: (email: string) => Promise.resolve(),
+  _updatePassword: (newPassword: string) => Promise.resolve(),
+  verifyEmailAddress: (obbCode: string) => Promise.resolve(),
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -53,15 +70,26 @@ export default function AuthContextProvider({ children }: any) {
   }, []);
 
   useEffect(() => {
-    console.log("The user is", currentUser);
+    console.log("The user is", currentUser?.uid);
   }, [currentUser]);
 
   function login(email: string, password: string) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  function register(email: string, password: string) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  function register(email: string, password: string, fullName: string) {
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (result) => {
+        return updateProfile(result.user, { displayName: fullName });
+      }
+    );
+  }
+
+  function updateDisplayName(fullName: string) {
+    if (currentUser) {
+      return updateProfile(currentUser, { displayName: fullName });
+    }
+    return new Promise<void>(() => {});
   }
 
   function forgotPassword(email: string) {
@@ -84,10 +112,19 @@ export default function AuthContextProvider({ children }: any) {
   }
 
   function verifyEmail() {
-    if (currentUser) {
-      return sendEmailVerification(currentUser);
-    }
-    return new Promise<void>(() => {});
+    return sendEmailVerification(currentUser!);
+  }
+
+  function updateEmailAddress(email: string) {
+    return updateEmail(currentUser!, email);
+  }
+
+  function verifyEmailAddress(obbCode: string) {
+    return applyActionCode(auth, obbCode);
+  }
+
+  async function _updatePassword(newPassword: string) {
+    return updatePassword(currentUser!, newPassword);
   }
 
   const contextValue = {
@@ -99,6 +136,10 @@ export default function AuthContextProvider({ children }: any) {
     forgotPassword,
     resetPassword,
     verifyEmail,
+    updateDisplayName,
+    updateEmailAddress,
+    verifyEmailAddress,
+    _updatePassword,
   };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

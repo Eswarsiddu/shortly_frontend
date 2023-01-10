@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useFormik } from "formik";
 import { signUpSchema } from "../Schemas/SignupSchema";
+import { BACKEND_URL } from "../utils/Utils";
 import "./Form.css";
 
 interface SignUpValues {
@@ -30,14 +31,18 @@ export function SignUp() {
       validationSchema: signUpSchema,
       onSubmit: (values, _) => {
         console.log(values);
-        Register(values.email, values.password);
+        Register(values.email, values.password, values.fullName);
       },
     });
 
-  const Register = async (email: string, password: string) => {
+  const Register = async (
+    email: string,
+    password: string,
+    fullName: string
+  ) => {
     try {
       setEmailError(false);
-      await register(email, password);
+      await register(email, password, fullName);
       navigate("/dashboard");
     } catch ({ code }) {
       console.log(code);
