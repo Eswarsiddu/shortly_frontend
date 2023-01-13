@@ -1,7 +1,5 @@
 nav {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .title {
@@ -14,7 +12,6 @@ nav {
 
 .title p {
   display: inline-block;
-  margin: 0;
   user-select: none;
   background-image: linear-gradient(to right, #392fa4, #c21ee7);
   color: transparent;
@@ -26,7 +23,7 @@ nav {
   cursor: pointer;
 }
 
-.mobile {
+.only-title {
   text-align: center;
 }
 
@@ -34,16 +31,9 @@ nav {
   background-color: red;
   width: 3rem;
   height: 3rem;
-  display: flex;
   border-radius: 50%;
   justify-content: center;
-  align-items: center;
   font-size: xx-large;
-}
-.username p {
-  padding: 0;
-  margin: 0;
-  text-align: center;
 }
 
 nav a {
@@ -67,7 +57,7 @@ nav a:hover {
 }
 
 @media (min-width: 640px) {
-  .mobile {
+  .only-title {
     text-align: left;
   }
 }

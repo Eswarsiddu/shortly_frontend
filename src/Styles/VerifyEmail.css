@@ -1,0 +1,7 @@
+.verify-email {
+  justify-content: center;
+}
+.verify-email button {
+  width: max-content;
+  padding: 0.5rem 1rem;
+}

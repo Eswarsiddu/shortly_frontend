@@ -1,21 +1,11 @@
-import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function Dashboard() {
-  const { currentUser, verifyEmail } = useAuth();
+  const { currentUser } = useAuth();
+  const uid = currentUser?.uid;
   return (
     <>
-      <p>dashboard</p>
-      {!currentUser?.emailVerified && (
-        <button
-          onClick={async () => {
-            await verifyEmail();
-          }}
-        >
-          verifyEmail
-        </button>
-      )}
+      <p>dashboard {uid}</p>
     </>
   );
 }

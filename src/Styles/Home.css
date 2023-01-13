@@ -1,38 +1,34 @@
 .intro {
-  position: relative;
   margin-top: 2rem;
-  display: flex;
   gap: 2.5rem;
-  height: 75vh;
-  flex-grow: 1;
-  flex-direction: column;
+  padding-bottom: 1rem;
 }
 
 .intro > p {
   font-size: 3rem;
   font-weight: 700;
   color: #456077;
-  margin: 0;
+}
+
+.url-block p {
+  color: #7e7e7e;
+  line-height: 1.5;
 }
 
 .browser-bar {
   background-color: #e2e8ed;
   width: 90%;
   padding: 0.5rem 0.8rem;
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
   border-radius: 0.5rem;
 }
 
 .controls {
-  display: flex;
   align-items: center;
   gap: 0.8rem;
 }
 
 .control-buttons {
-  display: flex;
   gap: 0.8rem;
 }
 
@@ -58,17 +54,10 @@
 }
 
 .url-block {
-  display: flex;
   border-radius: 0.5rem;
   gap: 0.3rem;
   padding: 0.5rem 0.2rem;
   background-color: white;
-}
-
-.url-block p {
-  color: #7e7e7e;
-  margin: 0;
-  line-height: 1.5;
 }
 
 .fa-scissors {

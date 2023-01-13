@@ -1,4 +1,4 @@
-import "./App.css";
+import "./Styles/App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./Pages/Home";
@@ -13,6 +13,9 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import { FirebaseActions } from "./Pages/FirebaseActions";
 import { ToastContainer } from "react-toastify";
+import { VerificationSend } from "./Pages/VerificationSend";
+import { ResetPasswordMailSend } from "./Pages/ResetPasswordMailSend";
+import { CreateNew } from "./Pages/CreateNew";
 
 function App() {
   return (
@@ -37,8 +40,14 @@ function App() {
           />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/firebaseActions" element={<FirebaseActions />} />
+          <Route path="/verificationsend" element={<VerificationSend />} />
+          <Route
+            path="/passwordrecoverysend"
+            element={<ResetPasswordMailSend />}
+          />
         </Route>
         <Route element={<NavBar />}>
+          <Route path="/create" element={<CreateNew />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route
             path="/"

@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { checkPasswordConstraints } from "../utils/Utils";
 
 export function ResetPassword({ obbCode }: any) {
   const [password, setPassword] = useState("");
   const [cnfPassword, setCnfPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const { resetPassword } = useAuth();
   const navigate = useNavigate();
   return (
@@ -18,6 +21,12 @@ export function ResetPassword({ obbCode }: any) {
             setPassword(event.target.value);
           }}
         />
+        {passwordError && (
+          <p className="error">
+            Password must contain at least 6 characters, including UPPER, lower,
+            special character, number
+          </p>
+        )}
       </div>
       <div>
         <label htmlFor="password">confirm Password</label>
@@ -28,13 +37,21 @@ export function ResetPassword({ obbCode }: any) {
             setCnfPassword(event.target.value);
           }}
         />
+        {confirmPasswordError && (
+          <p className="error">Password doesn't match</p>
+        )}
       </div>
       <button
         onClick={async () => {
           if (obbCode) {
-            await resetPassword(obbCode, password);
-            console.log(password);
-            navigate("/login");
+            setPasswordError(false);
+            setConfirmPasswordError(false);
+            if (checkPasswordConstraints(password)) {
+              if (password == cnfPassword) {
+                await resetPassword(obbCode, password);
+                navigate("/login");
+              } else setConfirmPasswordError(true);
+            } else setPasswordError(true);
           }
         }}
       >

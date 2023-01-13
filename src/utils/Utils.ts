@@ -20,3 +20,6 @@ export function showToast(msg: string) {
     theme: "light",
   });
 }
+
+export const authErrorMessage = (code: string) =>
+  code.replace("auth/", "").replaceAll("-", " ");

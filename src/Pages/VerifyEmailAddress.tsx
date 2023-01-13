@@ -6,7 +6,7 @@ export function VerifyEmailAddress({ oobCode }: any) {
   verifyEmailAddress(oobCode);
   return (
     <>
-      <p>Email has been verified</p>
+      <p>You have successfully verified your account</p>
       <Link to="/login">Login</Link>
     </>
   );

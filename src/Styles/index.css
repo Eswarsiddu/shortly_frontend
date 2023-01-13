@@ -1,0 +1,61 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  text-transform: capitalize;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.back {
+  text-decoration: none;
+  color: black;
+}
+
+.back i {
+  padding-right: 0.3rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.align-center {
+  align-items: center;
+}
+
+@media (min-width: 1536px) {
+  body {
+    width: 1536px;
+    margin: 0 auto;
+  }
+}
+
+/*
+TODO: remove in production
+*/
+#position {
+  position: fixed;
+  right: 50%;
+  top: 0;
+  font-weight: 700;
+}

@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { ProfileField } from "../components/ProfileField";
 import { useAuth } from "../context/AuthContext";
 import { checkPasswordConstraints, showToast } from "../utils/Utils";
-import "./Profile.css";
+import "../Styles/Profile.css";
 
 export function Profile() {
   const {
     currentUser,
     updateEmailAddress,
     updateDisplayName,
-    logout,
     _updatePassword: updatePassword,
   } = useAuth();
   const [account, setAccount] = useState(true);
@@ -25,9 +25,9 @@ export function Profile() {
         <i className="fa-solid fa-caret-left"></i>Dashboard
       </Link>
       <div className="profile">
-        <div className="tab-bar">
+        <div className="tab-bar flex">
           <p
-            className={"account " + (account ? "active" : "")}
+            className={"account m-0 " + (account ? "active" : "")}
             onClick={() => {
               setAccount(true);
             }}
@@ -35,30 +35,30 @@ export function Profile() {
             Account
           </p>
           <p
-            className={!account ? "active" : ""}
+            className={"m-0 " + (!account ? "active" : "")}
             onClick={() => setAccount(false)}
           >
             Security
           </p>
         </div>
         {account ? (
-          <div className="profile-info">
+          <div className="profile-info flex-column">
             <ProfileField
-              user={currentUser}
-              fieldName="Email ID"
+              value={currentUser?.email}
+              fieldName={"Email ID"}
+              type="email"
               setter={updateEmailAddress}
-              logout={logout}
             />
             <ProfileField
-              user={currentUser}
+              value={currentUser?.displayName}
               fieldName="Full Name"
+              type="text"
               setter={updateDisplayName}
-              refresh={() => currentUser?.reload()}
             />
           </div>
         ) : (
-          <div className="password-info">
-            <div>
+          <div className="password-info flex-column">
+            <div className="flex-column">
               <label htmlFor="new-password">New Password</label>
               <input
                 autoComplete="false"
@@ -71,13 +71,13 @@ export function Profile() {
                 }}
               />
               {passwordError && (
-                <p className="form-error">
+                <p className="form-error m-0">
                   Password must contain at least 6 characters, including UPPER,
                   lower, special character, number
                 </p>
               )}
             </div>
-            <div>
+            <div className="flex-column">
               <label htmlFor="cnf-password">Confirm Password</label>
               <input
                 autoComplete="false"
@@ -88,9 +88,11 @@ export function Profile() {
                   setNewConfirmPassword(e.target.value);
                 }}
               />
-              {matchError && <p className="error">Password doesn't match</p>}
+              {matchError && (
+                <p className="error m-0">Password doesn't match</p>
+              )}
             </div>
-            <div>
+            <div className="flex-column">
               <button
                 className="update-btn"
                 onClick={async () => {
@@ -128,76 +130,5 @@ export function Profile() {
         )}
       </div>
     </>
-  );
-}
-
-function ProfileField({ fieldName, user, setter, logout, refresh }: any) {
-  const value = fieldName == "Email ID" ? user.email : user.displayName;
-  const [fieldUpdate, setFieldUpdate] = useState(false);
-  const [newValue, setNewValue] = useState("");
-  const [filedError, setFieldError] = useState("");
-  return (
-    <div className="profile-field">
-      <p className="profile-title">{fieldName}</p>
-      {fieldUpdate ? (
-        <div className="profile-update">
-          <div>
-            <input
-              autoFocus
-              type="email"
-              value={newValue}
-              onChange={(e) => setNewValue(e.target.value.trim())}
-            />
-            <button
-              className="update-btn"
-              disabled={newValue == value}
-              onClick={async () => {
-                if (newValue != value) {
-                  try {
-                    await setter(newValue);
-                  } catch ({ code }: any) {
-                    console.log(code);
-                    if (code == "auth/email-already-in-use") {
-                      setFieldError("Email already in use");
-                    } else if (code == "auth/requires-recent-login") {
-                      setFieldError("Requires recent login");
-                    }
-                    return;
-                  }
-                }
-                setFieldUpdate(false);
-              }}
-            >
-              update
-            </button>
-            <button
-              className="cancel-btn"
-              onClick={() => {
-                setFieldUpdate(false);
-              }}
-            >
-              cancel
-            </button>
-          </div>
-          <div>{filedError != "" && <p className="error">{filedError}</p>}</div>
-        </div>
-      ) : (
-        <>
-          <div className="field-info">
-            <p>{value}</p>
-            <button
-              className="edit-btn"
-              onClick={() => {
-                setNewValue(value);
-                setFieldUpdate(true);
-                setFieldError("");
-              }}
-            >
-              Edit
-            </button>
-          </div>
-        </>
-      )}
-    </div>
   );
 }

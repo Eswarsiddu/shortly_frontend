@@ -1,21 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "../Styles/VerifyEmail.css";
 
 export function VerifyEmail() {
-  const { verifyEmail, logout } = useAuth();
+  const { verifyEmail, logout, currentUser } = useAuth();
   const navigate = useNavigate();
   return (
-    <>
-      <p>Verify Email</p>
+    <div className="verify-email flex-column align-center">
+      <p>Verify your email</p>
+      <p>
+        Hi {currentUser?.displayName}! Use the link below to receive
+        verification mail to your registered email address
+      </p>
       <button
         onClick={async () => {
           await verifyEmail();
           await logout();
-          navigate("/login");
+          navigate("/verificationsend");
         }}
       >
         Verify Email
       </button>
-    </>
+    </div>
   );
 }

@@ -3,34 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useFormik } from "formik";
 import { signUpSchema } from "../Schemas/SignupSchema";
-import { BACKEND_URL } from "../utils/Utils";
-import "./Form.css";
-
-interface SignUpValues {
-  fullName: string;
-  email: string;
-  password: string;
-  confirm_password: string;
-}
+import "../Styles/Form.css";
 
 export function SignUp() {
   const [passwordHide, setPasswordHide] = useState(true);
   const { register } = useAuth();
   const [emailError, setEmailError] = useState(false);
   const navigate = useNavigate();
-  const initialValues: SignUpValues = {
-    fullName: "",
-    email: "",
-    password: "",
-    confirm_password: "",
-  };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
-      initialValues,
+      initialValues: {
+        fullName: "",
+        email: "",
+        password: "",
+        confirm_password: "",
+      },
       validationSchema: signUpSchema,
       onSubmit: (values, _) => {
-        console.log(values);
         Register(values.email, values.password, values.fullName);
       },
     });
@@ -45,7 +35,6 @@ export function SignUp() {
       await register(email, password, fullName);
       navigate("/dashboard");
     } catch ({ code }) {
-      console.log(code);
       setEmailError(true);
     }
   };
@@ -55,9 +44,9 @@ export function SignUp() {
       <p className="redirect">
         Already have an account? <Link to="/login">Login</Link>
       </p>
-      <form onSubmit={handleSubmit}>
-        <div className="input-block">
-          <div className="block">
+      <form className="flex-column align-center" onSubmit={handleSubmit}>
+        <div className="input-block flex-column">
+          <div className="flex-column">
             <label htmlFor="fullName">Name</label>
             <input
               type="text"
@@ -68,11 +57,11 @@ export function SignUp() {
               onBlur={handleBlur}
             />
           </div>
-          {errors.fullName && touched.fullName ? (
-            <p className="form-error">{errors.fullName}</p>
-          ) : null}
+          {errors.fullName && touched.fullName && (
+            <p className="form-error m-0">{errors.fullName}</p>
+          )}
         </div>
-        <div className="input-block">
+        <div className="input-block flex-column">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -82,14 +71,14 @@ export function SignUp() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {(errors.email && touched.email) || emailError ? (
-            <p className="form-error">
+          {((errors.email && touched.email) || emailError) && (
+            <p className="form-error m-0">
               {emailError ? "Email already exists" : errors.email}
             </p>
-          ) : null}
+          )}
         </div>
-        <div className="input-block">
-          <div className="hide-block">
+        <div className="input-block flex-column">
+          <div className="hide-block flex">
             <label htmlFor="password">Password</label>
             <p
               className="hideBtn"
@@ -109,15 +98,15 @@ export function SignUp() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {errors.password && touched.password ? (
-            <p className="form-error">
+          {errors.password && touched.password && (
+            <p className="form-error m-0">
               Password must contain at least 6 characters, including UPPER,
               lower, special character, number
             </p>
-          ) : null}
+          )}
         </div>
         {passwordHide && (
-          <div className="input-block">
+          <div className="input-block flex-column">
             <label htmlFor="password">Confirm Password</label>
             <input
               type="password"
@@ -127,9 +116,9 @@ export function SignUp() {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.confirm_password && touched.confirm_password ? (
-              <p className="form-error">{errors.confirm_password}</p>
-            ) : null}
+            {errors.confirm_password && touched.confirm_password && (
+              <p className="form-error m-0">{errors.confirm_password}</p>
+            )}
           </div>
         )}
         <button className="submit-btn" type="submit">
@@ -137,7 +126,7 @@ export function SignUp() {
         </button>
       </form>
 
-      <p className="footer">
+      <p className="footer m-0">
         By signing in with an account, you agree to Shortly's
         <br />
         <Link to="/pages/terms" className="anchor" target="_blank">

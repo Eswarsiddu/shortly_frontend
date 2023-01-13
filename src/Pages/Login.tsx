@@ -4,11 +4,6 @@ import { useAuth } from "../context/AuthContext";
 import { useFormik } from "formik";
 import { loginSchema } from "../Schemas/LoginSchema";
 
-interface LoginValues {
-  email: string;
-  password: string;
-}
-
 function Login() {
   const [passwordHide, setPasswordHide] = useState(true);
   const [emailError, setEmailError] = useState(false);
@@ -17,14 +12,12 @@ function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const initialValues: LoginValues = {
-    email: "",
-    password: "",
-  };
-
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
-      initialValues,
+      initialValues: {
+        email: "",
+        password: "",
+      },
       validationSchema: loginSchema,
       onSubmit: (values, _) => {
         console.log(values);
@@ -39,27 +32,21 @@ function Login() {
     try {
       await login(email, password);
       navigate("/dashboard");
-    } catch (e: any) {
-      if (e.code == "auth/wrong-password") {
-        setPasswordError(true);
-      } else if (e.code == "auth/user-not-found") {
-        setEmailError(true);
-      } else {
-        setServerError(true);
-      }
-      console.log(e.code);
+    } catch ({ code }: any) {
+      if (code == "auth/wrong-password") setPasswordError(true);
+      else if (code == "auth/user-not-found") setEmailError(true);
+      else setServerError(true);
     }
   };
 
   return (
     <>
       <h3 className="heading">Login and start sharing</h3>
-      {/* <Link to="/forgetPassword">Forget password</Link> */}
       <p className="redirect">
         don't have an account? <Link to="/signUp">Create one</Link>
       </p>
-      <form onSubmit={handleSubmit}>
-        <div className="input-block">
+      <form className="flex-column align-center" onSubmit={handleSubmit}>
+        <div className="input-block flex-column">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -69,14 +56,15 @@ function Login() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {(errors.email && touched.email) || emailError ? (
-            <p className="form-error">
-              {emailError ? "Email not found" : errors.email}
-            </p>
-          ) : null}
+          {(errors.email && touched.email) ||
+            (emailError && (
+              <p className="form-error m-0">
+                {emailError ? "Email not found" : errors.email}
+              </p>
+            ))}
         </div>
-        <div className="input-block">
-          <div className="hide-block">
+        <div className="input-block flex-column">
+          <div className="hide-block flex">
             <label htmlFor="password">Password</label>
             <p
               className="hideBtn"
@@ -96,12 +84,13 @@ function Login() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {passwordError ? (
-            <p className="form-error">Incorrect password</p>
-          ) : null}
+          {passwordError && (
+            <p className="form-error m-0">Incorrect password</p>
+          )}
         </div>
+        <Link to="/forgetPassword">Forget Password</Link>
         {serverError && (
-          <p className="form-error">Please try after some time</p>
+          <p className="form-error m-0">Please try after some time</p>
         )}
         <button className="submit-btn" type="submit">
           Login
