@@ -91,6 +91,6 @@ input:focus {
 
 @media (min-width: 640px) {
   form {
-    width: 50%;
+    width: 40%;
   }
 }
