@@ -5,7 +5,7 @@ export const CreateUrlSchema = Yup.object({
   backHalf: Yup.string()
     .matches(
       backHalfRegEx,
-      "Back half must contain at least 5 characters, include only Uppercase, lowercase and numbers"
+      "Back half must contain 5 - 30 characters, include only Uppercase, lowercase and numbers"
     )
     .required("please enter back Half"),
   title: Yup.string().min(3).max(20).required("please enter title"),

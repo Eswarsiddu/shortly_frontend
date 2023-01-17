@@ -28,7 +28,9 @@ nav {
 }
 
 .username {
-  background-color: red;
+  /* background-color: red; */
+  background-color: rgb(57, 47, 164, 0.8);
+  color: white;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -41,9 +43,10 @@ nav a {
   text-decoration: none;
 }
 
-nav a:hover {
-  color: rgba(0, 0, 0, 0.6);
-}
+/* nav a:hover { */
+/* color: rgba(0, 0, 0, 0.6); */
+/* } */
+
 .signUp {
   background-color: rgba(1, 100, 150, 0.7);
   color: white;
@@ -54,6 +57,20 @@ nav a:hover {
 .signUp:hover {
   color: white;
   background-color: rgba(1, 100, 150, 1);
+}
+
+.profile-block {
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid;
+  border-color: transparent;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.profile-block-hover:hover {
+  cursor: pointer;
+  border-color: rgb(194, 30, 231);
 }
 
 @media (min-width: 640px) {

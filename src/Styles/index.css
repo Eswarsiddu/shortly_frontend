@@ -4,6 +4,8 @@ body {
 }
 
 #root {
+  height: 100vh;
+  width: 97vw;
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
@@ -41,6 +43,9 @@ button:hover {
 
 .align-center {
   align-items: center;
+}
+.hide {
+  display: none;
 }
 
 @media (min-width: 1536px) {

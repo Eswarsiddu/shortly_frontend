@@ -36,6 +36,7 @@ export function CreateNew() {
         } catch (e) {
           // console.log("customerror", e);
           if (e == "serverError") {
+            setServerError(true);
           } else {
             setBackHalfError(true);
           }

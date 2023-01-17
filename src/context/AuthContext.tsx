@@ -17,7 +17,6 @@ import {
   User,
 } from "firebase/auth";
 import { authInterface } from "../utils/Types/AuthInterface";
-import { removeCookie, setCookie } from "../utils/BackendRequests";
 
 const AuthContext = createContext<authInterface>({
   currentUser: undefined,
@@ -45,9 +44,6 @@ export default function AuthContextProvider({ children }: any) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      if (user) {
-        setCookie(user.uid);
-      }
     });
     return () => {
       unsubscribe();
@@ -84,10 +80,7 @@ export default function AuthContextProvider({ children }: any) {
 
     verifyEmail: () => sendEmailVerification(currentUser!),
 
-    logout: () => {
-      removeCookie();
-      return signOut(auth);
-    },
+    logout: () => signOut(auth),
   };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

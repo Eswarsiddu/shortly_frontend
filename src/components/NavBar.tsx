@@ -40,15 +40,28 @@ export function NavBar({ onlyTitle = false }) {
         {!onlyTitle &&
           (typeof currentUser == "undefined" ? null : currentUser ? (
             <>
-              {location.pathname == "/dashboard" && (
-                <Link to="/create">Create New</Link>
-              )}
-              <div className="username flex align-center">
-                <span>{currentUser?.displayName?.at(0)}</span>
+              {/* {location.pathname == "/dashboard" && (
+                <Link id="create-url" to="/create">
+                  Create New
+                </Link>
+              )} */}
+              <div
+                onClick={() => {
+                  if (location.pathname != "/profile") {
+                    navigate("/profile");
+                  }
+                }}
+                className={`flex profile-block ${
+                  location.pathname != "/profile" ? "profile-block-hover" : ""
+                }`}
+              >
+                <div className="username flex align-center">
+                  <span>{currentUser?.displayName?.at(0)}</span>
+                </div>
+                {location.pathname != "/profile" && (
+                  <p className="m-0">{currentUser?.displayName}</p>
+                )}
               </div>
-              {location.pathname != "/profile" && (
-                <Link to="/profile">Profile</Link>
-              )}
               <i
                 className="fa-solid fa-right-from-bracket"
                 onClick={async () => {
