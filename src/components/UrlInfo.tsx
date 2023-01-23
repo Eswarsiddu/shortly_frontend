@@ -1,39 +1,21 @@
-import { useState, useRef } from "react";
+import { useState, useRef, memo } from "react";
 import "../Styles/UrlInfo.css";
 import { QRCodeCanvas } from "qrcode.react";
 import {
-  BACKEND_URL,
   getFullDate,
   getShortUrl,
   getShortUrlHttp,
   showToast,
 } from "../utils/Utils";
-export function UrlInfo({ url }: any) {
-  if (url) {
-    const qrRef = useRef<HTMLInputElement>(null);
-    const { createDate, destinationUrl, backHalf, title, hits, scans } = url;
-    const shortUrl = getShortUrl(backHalf);
-    const shortUrlHttp = getShortUrlHttp(backHalf);
-    const qrCode = (
-      <QRCodeCanvas
-        id="qr-code"
-        value={`${shortUrlHttp}?r=qr`}
-        size={200}
-        bgColor="#ffffff"
-        fgColor="#000000"
-        level="M"
-        includeMargin={true}
-        imageSettings={{
-          src: "/shortly_icon.png",
-          x: undefined,
-          y: undefined,
-          height: 35,
-          width: 30,
-          excavate: true,
-        }}
-      />
-    );
-    return (
+export const UrlInfo = ({ urlData }: any) => {
+  // if (undefined) {
+  //   console.log("urls data", urlsData);
+  if (!urlData) return <>No data</>;
+  const qrRef = useRef<HTMLInputElement>(null);
+  const { createDate, destinationUrl, backHalf, title, hits, scans } = urlData;
+  // if (loading) return <p>loading</p>;
+  return (
+    <>
       <div className="url-info">
         <div className="flex-column">
           <p className="url-info-title m-0">{title}</p>
@@ -42,13 +24,13 @@ export function UrlInfo({ url }: any) {
             {getFullDate(createDate)}
           </p>
           <div className="short-url-block flex">
-            <a target="_blank" href={shortUrlHttp}>
-              {shortUrl}
+            <a target="_blank" href={getShortUrlHttp(backHalf)}>
+              {getShortUrl(backHalf)}
             </a>
             <button
               className="copy"
               onClick={async () => {
-                await navigator.clipboard.writeText(shortUrlHttp);
+                await navigator.clipboard.writeText(getShortUrlHttp(backHalf));
                 showToast("copied to clipboard");
               }}
             >
@@ -64,7 +46,22 @@ export function UrlInfo({ url }: any) {
             {destinationUrl}
           </a>
           <div className="flex qr-code-block" ref={qrRef}>
-            {qrCode}
+            <QRCodeCanvas
+              value={`${getShortUrlHttp(backHalf)}?r=qr`}
+              size={200}
+              bgColor="#ffffff"
+              fgColor="#000000"
+              level="M"
+              includeMargin={true}
+              imageSettings={{
+                src: "/shortly_icon.png",
+                x: undefined,
+                y: undefined,
+                height: 35,
+                width: 30,
+                excavate: true,
+              }}
+            />
             <div className="flex-column">
               <p className="scans m-0">
                 {scans} {scans == 1 ? "scan" : "scans"}
@@ -89,7 +86,8 @@ export function UrlInfo({ url }: any) {
           </div>
         </div>
       </div>
-    );
-  }
-  return <></>;
-}
+    </>
+  );
+};
+// }
+// export default memo(UrlInfo);

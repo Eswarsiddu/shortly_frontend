@@ -6,7 +6,6 @@
     rgb(169, 172, 175),
     rgb(236, 240, 243)
   ) !important;
-  /* flex-grow: 2; */
   width: 55%;
   height: 92%;
   /* TODO: crazy theme*/
@@ -48,7 +47,8 @@
 
 .short-url-block a {
   text-decoration: none;
-  font-size: large;
+  /* font-size: large; */
+  font-size: medium;
   color: #392fa4;
 }
 

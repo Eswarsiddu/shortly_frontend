@@ -1,7 +1,7 @@
 export const BACKEND_URL = "127.0.0.1:8000";
 export const BACKEND_URL_HTTP: string = "http://127.0.0.1:8000";
 export const PAGE_URL = "shortly.com";
-export const DATA_LENGTH_SIZE = 10;
+export const DATA_LENGTH_SIZE = 8;
 export const passwordRegEx =
   /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 export function checkPasswordConstraints(password: string) {
@@ -81,7 +81,7 @@ export function getDate(time: number) {
   const date = fullDate.getDate();
   const month = fullDate.getMonth();
   const year = fullDate.getFullYear();
-  console.log({ date, month, year });
+  // console.log({ date, month, year });
   return `${date} ${MonthNumber(month)?.slice(0, 3).toUpperCase()} ${year}`;
 }
 
