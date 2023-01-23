@@ -11,8 +11,10 @@ export function UrlList({
   currentUrlIndex,
   nextPage,
   resetData,
+  inputRef,
+  searchData,
 }: any) {
-  let inputRef = useRef<HTMLInputElement>(null);
+  // let inputRef = useRef<HTMLInputElement>(null);
   // const [pageNo,setPageNo] = useState(1);
   // let pageNo = 1;
   // const observer = useRef<HTMLDivElement>(null);
@@ -74,6 +76,7 @@ export function UrlList({
           <i
             onClick={() => {
               inputRef.current!.value = "";
+              // searchData();
               resetData();
               // getUrlsData(1);
             }}
@@ -85,6 +88,8 @@ export function UrlList({
             className="search"
             onClick={() => {
               const value = inputRef.current!.value.trim();
+              // resetData();
+              searchData();
               if (value) {
                 // searchUrls(value);
               } else {
@@ -141,6 +146,7 @@ function UrlTile({
   // console.log("last ref", lastUrlTileRef);
   return (
     <div
+      key={id}
       ref={ref}
       className={`url-tile ${id == currentUrlIndex ? "active" : ""}`}
       onClick={() => {
