@@ -6,10 +6,30 @@
     rgb(169, 172, 175),
     rgb(236, 240, 243)
   ) !important;
-  width: 55%;
+  /* width: 55%; */
+  width: 40%;
   height: 92%;
   /* TODO: crazy theme*/
   /* background-image: linear-gradient(to right, #c21ee7, #392fa4); */
+}
+
+.close-symbol {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  font-size: x-large;
+}
+
+.close-symbol:hover {
+  cursor: pointer;
+}
+
+.url-info-mobile {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
 }
 
 .url-info > div {

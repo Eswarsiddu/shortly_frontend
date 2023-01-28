@@ -1,0 +1,17 @@
+.reset-mail-send {
+  padding: 1rem;
+  margin: 0 auto;
+  align-items: center;
+  background-color: rgb(255, 255, 255, 0.6);
+  border-radius: 0.5rem;
+  /* width: max-content; */
+  max-width: 90%;
+}
+.mail-send-icon {
+  background-image: linear-gradient(to bottom, #392fa4, #c21ee7);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}

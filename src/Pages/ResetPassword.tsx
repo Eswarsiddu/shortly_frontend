@@ -11,8 +11,24 @@ export function ResetPassword({ obbCode }: any) {
   const { resetPassword } = useAuth();
   const navigate = useNavigate();
   return (
-    <>
-      <div>
+    <form
+      className="flex-column align-center"
+      onSubmit={async (e) => {
+        e.preventDefault();
+
+        if (obbCode) {
+          setPasswordError(false);
+          setConfirmPasswordError(false);
+          if (checkPasswordConstraints(password)) {
+            if (password == cnfPassword) {
+              await resetPassword(obbCode, password);
+              navigate("/login");
+            } else setConfirmPasswordError(true);
+          } else setPasswordError(true);
+        }
+      }}
+    >
+      <div className="input-block flex-column">
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -22,13 +38,13 @@ export function ResetPassword({ obbCode }: any) {
           }}
         />
         {passwordError && (
-          <p className="error">
-            Password must contain at least 6 characters, including UPPER, lower,
-            special character, number
+          <p className="form-error m-0">
+            Password must contain at least 6 characters, including Upper, Lower,
+            Special Character, Number
           </p>
         )}
       </div>
-      <div>
+      <div className="input-block flex-column">
         <label htmlFor="password">confirm Password</label>
         <input
           type="password"
@@ -38,25 +54,12 @@ export function ResetPassword({ obbCode }: any) {
           }}
         />
         {confirmPasswordError && (
-          <p className="error">Password doesn't match</p>
+          <p className="form-error m-0">Password doesn't match</p>
         )}
       </div>
-      <button
-        onClick={async () => {
-          if (obbCode) {
-            setPasswordError(false);
-            setConfirmPasswordError(false);
-            if (checkPasswordConstraints(password)) {
-              if (password == cnfPassword) {
-                await resetPassword(obbCode, password);
-                navigate("/login");
-              } else setConfirmPasswordError(true);
-            } else setPasswordError(true);
-          }
-        }}
-      >
+      <button className="submit-btn" type="submit">
         Reset
       </button>
-    </>
+    </form>
   );
 }

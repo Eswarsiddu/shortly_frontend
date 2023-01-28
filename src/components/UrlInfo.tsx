@@ -1,4 +1,4 @@
-import { useState, useRef, memo } from "react";
+import { useRef } from "react";
 import "../Styles/UrlInfo.css";
 import { QRCodeCanvas } from "qrcode.react";
 import {
@@ -7,13 +7,11 @@ import {
   getShortUrlHttp,
   showToast,
 } from "../utils/Utils";
-export const UrlInfo = ({ urlData }: any) => {
-  // if (undefined) {
-  //   console.log("urls data", urlsData);
+export const UrlInfo = ({ urlData, loading }: any) => {
+  if (loading) return <>loading</>;
   if (!urlData) return <>No data</>;
   const qrRef = useRef<HTMLInputElement>(null);
   const { createDate, destinationUrl, backHalf, title, hits, scans } = urlData;
-  // if (loading) return <p>loading</p>;
   return (
     <>
       <div className="url-info">
@@ -89,5 +87,3 @@ export const UrlInfo = ({ urlData }: any) => {
     </>
   );
 };
-// }
-// export default memo(UrlInfo);

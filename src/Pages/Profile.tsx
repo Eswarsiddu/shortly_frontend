@@ -44,15 +44,17 @@ export function Profile() {
         {account ? (
           <div className="profile-info flex-column">
             <ProfileField
-              value={currentUser?.email}
+              currentUser={currentUser}
               fieldName={"Email ID"}
               type="email"
+              valueKey="email"
               setter={updateEmailAddress}
             />
             <ProfileField
-              value={currentUser?.displayName}
+              currentUser={currentUser}
               fieldName="Full Name"
               type="text"
+              valueKey="displayName"
               setter={updateDisplayName}
             />
           </div>

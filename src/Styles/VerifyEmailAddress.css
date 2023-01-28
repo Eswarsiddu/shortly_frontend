@@ -1,0 +1,22 @@
+.check-icon {
+  position: relative;
+  background-image: linear-gradient(
+    to right,
+    rgb(57, 47, 164, 0.9),
+    rgb(194, 30, 231, 0.8)
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 4rem;
+  padding-bottom: 1rem;
+  max-width: 90%;
+}
+
+.verify-email-address {
+  padding: 1rem;
+  width: max-content;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  background-color: white;
+}

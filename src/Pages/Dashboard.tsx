@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { UrlInfo } from "../components/UrlInfo";
+import { UrlInfoMobile } from "../components/UrlInfoMobile";
 import { UrlList } from "../components/UrlList";
 import { useAuth } from "../context/AuthContext";
 import { getUrls } from "../utils/BackendRequests";
@@ -12,37 +13,20 @@ export function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
   let inputRef = useRef<HTMLInputElement>(null);
+  const [width, setWidth] = useState(window.innerWidth);
+  const [urlInfo, setUrlInfo] = useState(false);
 
   function nextPage() {
-    console.log("next page loading", { loading, hasMore });
     if (loading || !hasMore) return;
-    console.log("next page");
     setLoading(true);
     setPageNo((prev) => prev + 1);
-    console.log("pageNo", pageNo);
   }
 
   const loadData = () => {
-    console.log("current", inputRef.current?.value);
-    getUrls(pageNo, uid, inputRef.current?.value as string).then(
+    getUrls(pageNo, uid, inputRef.current?.value.trim() as string).then(
       ({ _data, _hasMore }) => {
-        console.log(
-          "data",
-          _data.map(({ backHalf }: any) => {
-            backHalf;
-          })
-        );
         setHasMore(_hasMore);
-        setUrlsData((prev) => {
-          const d = [...prev, ..._data];
-          console.log(
-            "new d",
-            d.map(({ backHalf }: any) => {
-              return backHalf;
-            })
-          );
-          return pageNo != 1 ? d : _data;
-        });
+        setUrlsData((prev) => (pageNo != 1 ? [...prev, ..._data] : _data));
         setLoading(false);
       }
     );
@@ -50,27 +34,15 @@ export function Dashboard() {
 
   useEffect(loadData, [pageNo]);
 
-  function selectUrl(index: number) {
-    setCurrentUrlIndex(index);
-  }
-
   const resetData = () => {
-    // if (inputRef.current) {
     inputRef.current!.value = "";
-    // }
     setLoading(true);
-    // getUrls(1, uid).then(({ _data, _hasMore }) => {
-    // console.log("data", _data);
     if (pageNo != 1) {
       setPageNo(1);
     } else {
       loadData();
     }
     setCurrentUrlIndex(0);
-    // setUrlsData(_data);
-    // setHasMore(_hasMore);
-    // setLoading(false);
-    // });
   };
 
   const searchData = () => {
@@ -80,24 +52,50 @@ export function Dashboard() {
     loadData();
   };
 
-  useEffect(loadData, []);
+  useEffect(() => {
+    loadData();
+    function handleResize() {
+      console.log("resized");
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  // if (urlsData.length > 0) {
   return (
     <div className="flex" style={{ height: "88%" }}>
       <UrlList
         urlsData={urlsData}
-        selectUrl={selectUrl}
+        setCurrentUrlIndex={(index: number) => {
+          if (width <= 768) {
+            setUrlInfo(true);
+          }
+          setCurrentUrlIndex(index);
+        }}
         currentUrlIndex={currentUrlIndex}
         nextPage={nextPage}
         loading={loading}
         resetData={resetData}
         inputRef={inputRef}
         searchData={searchData}
+        width={width}
       />
-      <UrlInfo urlData={urlsData[currentUrlIndex]} />
+      {/* <UrlInfo urlData={urlsData[currentUrlIndex]} /> */}
+      {/* 
+      //TODO: implement null, 640
+      */}
+      {width <= 768 ? (
+        urlInfo ? (
+          <UrlInfoMobile
+            urlData={urlsData[currentUrlIndex]}
+            closeComponent={() => {
+              setUrlInfo(false);
+            }}
+          />
+        ) : null
+      ) : (
+        <UrlInfo loading={loading} urlData={urlsData[currentUrlIndex]} />
+      )}
     </div>
   );
-  // }
-  // return <>Loading</>;
 }

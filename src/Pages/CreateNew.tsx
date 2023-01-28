@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { PulseLoader } from "react-spinners";
 import { useAuth } from "../context/AuthContext";
 import { CreateUrlSchema } from "../Schemas/CreateUrlSchema";
 import "../Styles/Form.css";
@@ -11,6 +12,7 @@ export function CreateNew() {
   const [urlError, setUrlError] = useState(false);
   const [backHalfError, setBackHalfError] = useState(false);
   const [serverError, setServerError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -22,11 +24,13 @@ export function CreateNew() {
       },
       validationSchema: CreateUrlSchema,
       onSubmit: async (values, _) => {
+        setLoading(true);
         if (
           values.destinationUrl.includes(location.host) ||
           values.destinationUrl.includes(PAGE_URL)
         ) {
           setUrlError(true);
+          setLoading(false);
           return;
         }
         setUrlError(false);
@@ -34,21 +38,21 @@ export function CreateNew() {
           await createUrl(values, currentUser!.uid);
           navigate("/dashboard");
         } catch (e) {
-          // console.log("customerror", e);
           if (e == "serverError") {
             setServerError(true);
           } else {
             setBackHalfError(true);
           }
+          setLoading(false);
           return;
         }
-        console.log(values);
       },
     });
   return (
     <>
       <Link to="/dashboard" className="back">
-        back to dashboard
+        <i className="fa-solid fa-caret-left"></i>
+        Back to Dashboard
       </Link>
       <form onSubmit={handleSubmit} className="flex-column align-center">
         <div className="input-block flex-column">
@@ -115,8 +119,8 @@ export function CreateNew() {
             We are some issues with our server. Please try after some time
           </p>
         )}
-        <button className="submit-btn" type="submit">
-          Short Url
+        <button className="submit-btn" type="submit" disabled={loading}>
+          {loading ? <PulseLoader color="#36d7b7" /> : "Short Url"}
         </button>
       </form>
     </>

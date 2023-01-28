@@ -7,12 +7,13 @@ export function VerifyEmail() {
   const navigate = useNavigate();
   return (
     <div className="verify-email flex-column align-center">
-      <p>Verify your email</p>
+      <h2>Verify your email</h2>
       <p>
-        Hi {currentUser?.displayName}! Use the link below to receive
+        Hi {currentUser?.displayName}! Click on the button below to receive
         verification mail to your registered email address
       </p>
       <button
+        className="verify-email-login-link"
         onClick={async () => {
           await verifyEmail();
           await logout();

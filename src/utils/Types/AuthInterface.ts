@@ -17,4 +17,5 @@ export interface authInterface {
   updateEmailAddress: (email: string) => Promise<void>;
   verifyEmailAddress: (obbCode: string) => Promise<void>;
   _updatePassword: (newPassword: string) => Promise<void>;
+  recoverEmail: (oobCode: string) => Promise<void>;
 }

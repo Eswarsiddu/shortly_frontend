@@ -1,7 +1,34 @@
 .verify-email {
-  justify-content: center;
+  /* justify-content: center; */
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  /* width: max-content; */
+  max-width: 90%;
+  margin: 0 auto;
 }
+
+.verify-email p {
+  word-wrap: break-word;
+}
+
 .verify-email button {
   width: max-content;
   padding: 0.5rem 1rem;
+}
+
+.verify-email-login-link {
+  width: max-content;
+  padding: 0.5rem 1rem;
+  margin: 0 auto;
+  border: none;
+  color: white;
+  font-weight: 700;
+  background-color: rgba(1, 100, 150, 0.8);
+  border-radius: 0.5rem;
+}
+
+.verify-email-login-link:hover,
+.verify-email-login-link:focus {
+  background-color: rgba(1, 100, 150, 1);
 }

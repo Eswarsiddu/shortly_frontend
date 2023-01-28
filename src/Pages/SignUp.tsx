@@ -4,11 +4,13 @@ import { useAuth } from "../context/AuthContext";
 import { useFormik } from "formik";
 import { signUpSchema } from "../Schemas/SignupSchema";
 import "../Styles/Form.css";
+import { PulseLoader } from "react-spinners";
 
 export function SignUp() {
   const [passwordHide, setPasswordHide] = useState(true);
   const { register } = useAuth();
   const [emailError, setEmailError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -31,11 +33,13 @@ export function SignUp() {
     fullName: string
   ) => {
     try {
+      setLoading(true);
       setEmailError(false);
       await register(email, password, fullName);
       navigate("/dashboard");
     } catch ({ code }) {
       setEmailError(true);
+      setLoading(false);
     }
   };
   return (
@@ -121,8 +125,8 @@ export function SignUp() {
             )}
           </div>
         )}
-        <button className="submit-btn" type="submit">
-          Sign Up
+        <button className="submit-btn" type="submit" disabled={loading}>
+          {loading ? <PulseLoader color="#36d7b7" /> : "Sign Up"}
         </button>
       </form>
 

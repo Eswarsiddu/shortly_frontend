@@ -15,6 +15,7 @@ import {
   updatePassword,
   applyActionCode,
   User,
+  checkActionCode,
 } from "firebase/auth";
 import { authInterface } from "../utils/Types/AuthInterface";
 
@@ -32,6 +33,7 @@ const AuthContext = createContext<authInterface>({
   updateEmailAddress: (email: string) => Promise.resolve(),
   _updatePassword: (newPassword: string) => Promise.resolve(),
   verifyEmailAddress: (obbCode: string) => Promise.resolve(),
+  recoverEmail: (oobCode: string) => Promise.resolve(),
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -75,6 +77,16 @@ export default function AuthContextProvider({ children }: any) {
     updateEmailAddress: (email: string) => updateEmail(currentUser!, email),
 
     verifyEmailAddress: (obbCode: string) => applyActionCode(auth, obbCode),
+
+    recoverEmail: (oobCode: string) => {
+      let restoredEmail: string | null | undefined = null;
+      return checkActionCode(auth, oobCode)
+        .then((info) => {
+          restoredEmail = info["data"]["email"];
+          return applyActionCode(auth, oobCode);
+        })
+        .then(() => sendPasswordResetEmail(auth, restoredEmail!));
+    },
 
     signInWithGoogle: () => signInWithPopup(auth, new GoogleAuthProvider()),
 

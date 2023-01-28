@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useFormik } from "formik";
 import { loginSchema } from "../Schemas/LoginSchema";
+import { PulseLoader } from "react-spinners";
 
 function Login() {
   const [passwordHide, setPasswordHide] = useState(true);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [serverError, setServerError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -29,6 +31,7 @@ function Login() {
     setEmailError(false);
     setPasswordError(false);
     setServerError(false);
+    setLoading(true);
     try {
       await login(email, password);
       navigate("/dashboard");
@@ -36,6 +39,7 @@ function Login() {
       if (code == "auth/wrong-password") setPasswordError(true);
       else if (code == "auth/user-not-found") setEmailError(true);
       else setServerError(true);
+      setLoading(false);
     }
   };
 
@@ -92,8 +96,8 @@ function Login() {
         {serverError && (
           <p className="form-error m-0">Please try after some time</p>
         )}
-        <button className="submit-btn" type="submit">
-          Login
+        <button className="submit-btn" type="submit" disabled={loading}>
+          {loading ? <PulseLoader color="#36d7b7" /> : "Login"}
         </button>
       </form>
     </>

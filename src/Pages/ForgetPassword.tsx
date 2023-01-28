@@ -15,17 +15,16 @@ export function ForgetPassword() {
         Enter the email associated with your account and we'll send and email
         with instruction to reset your password
       </p>
-      <label className="m-0" htmlFor="email">
-        Email Address
-      </label>
       <input
         type="email"
+        placeholder="Email address"
         onChange={(event) => {
           setEmail(event.target.value);
         }}
       />
       {emailError != "" && <p className="error m-0">{emailError}</p>}
       <button
+      className="recover-password"
         onClick={async () => {
           setEmailError("");
           try {

@@ -1,10 +1,19 @@
 import { useState } from "react";
+import { BeatLoader, BounceLoader, PulseLoader } from "react-spinners";
 import { authErrorMessage } from "../utils/Utils";
 
-export function ProfileField({ fieldName, value, setter, type }: any) {
+export function ProfileField({
+  fieldName,
+  currentUser,
+  valueKey,
+  setter,
+  type,
+}: any) {
   const [fieldUpdate, setFieldUpdate] = useState(false);
+  const value = currentUser[valueKey];
   const [newValue, setNewValue] = useState("");
   const [filedError, setFieldError] = useState("");
+  const [loading, setLoading] = useState(false);
   return (
     <div className="profile-field flex-column">
       <p className="profile-title m-0">{fieldName}</p>
@@ -21,18 +30,21 @@ export function ProfileField({ fieldName, value, setter, type }: any) {
               className="update-btn"
               disabled={newValue.trim() == value}
               onClick={async () => {
+                setLoading(true);
                 if (newValue != value) {
                   try {
                     await setter(newValue.trim());
                   } catch ({ code }: any) {
                     setFieldError(authErrorMessage(code as string));
+                    setLoading(false);
                     return;
                   }
                 }
                 setFieldUpdate(false);
+                setLoading(false);
               }}
             >
-              update
+              {loading ? <BeatLoader size={15} color="#36d7b7" /> : "Update"}
             </button>
             <button
               className="cancel-btn"
@@ -40,7 +52,7 @@ export function ProfileField({ fieldName, value, setter, type }: any) {
                 setFieldUpdate(false);
               }}
             >
-              cancel
+              Cancel
             </button>
           </div>
           <div>
@@ -55,6 +67,7 @@ export function ProfileField({ fieldName, value, setter, type }: any) {
             onClick={() => {
               setNewValue(value);
               setFieldUpdate(true);
+              setLoading(false);
               setFieldError("");
             }}
           >
