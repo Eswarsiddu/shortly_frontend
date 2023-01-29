@@ -37,7 +37,7 @@ export function Home() {
         </div>
       </div>
       <p className="m-0">the better</p>
-      <Link className="get-started" to="/signUp">
+      <Link className="get-started" to="/shortly_frontend/signUp">
         Get started
       </Link>
     </div>

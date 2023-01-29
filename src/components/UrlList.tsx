@@ -29,7 +29,7 @@ export function UrlList({
   return (
     <div className="url-list">
       <div className="flex-column search-bar">
-        <Link id="create-url" to="/create">
+        <Link id="create-url" to="/shortly_frontend/create">
           <i className="fa-solid fa-plus"></i>
           Create New URL
         </Link>

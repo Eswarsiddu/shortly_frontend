@@ -15,9 +15,12 @@ export function NavBar({ onlyTitle = false }) {
           <p
             className="m-0"
             onClick={() => {
-              if (onlyTitle) navigate("/");
-              else if (currentUser && location.pathname != "/dashboard")
-                navigate("/dashboard");
+              if (onlyTitle) navigate("/shortly_frontend");
+              else if (
+                currentUser &&
+                location.pathname != "/shortly_frontend/dashboard"
+              )
+                navigate("/shortly_frontend/dashboard");
             }}
           >
             Shortly
@@ -48,18 +51,20 @@ export function NavBar({ onlyTitle = false }) {
               )} */}
               <div
                 onClick={() => {
-                  if (location.pathname != "/profile") {
-                    navigate("/profile");
+                  if (location.pathname != "/shortly_frontend/profile") {
+                    navigate("/shortly_frontend/profile");
                   }
                 }}
                 className={`flex profile-block ${
-                  location.pathname != "/profile" ? "profile-block-hover" : ""
+                  location.pathname != "/shortly_frontend/profile"
+                    ? "profile-block-hover"
+                    : ""
                 }`}
               >
                 <div className="username flex align-center">
                   <span>{currentUser?.displayName?.at(0)}</span>
                 </div>
-                {location.pathname != "/profile" && (
+                {location.pathname != "/shortly_frontend/profile" && (
                   <p className="m-0">{currentUser?.displayName}</p>
                 )}
               </div>
@@ -67,14 +72,14 @@ export function NavBar({ onlyTitle = false }) {
                 className="fa-solid fa-right-from-bracket"
                 onClick={async () => {
                   await logout();
-                  navigate("/");
+                  navigate("/shortly_frontend");
                 }}
               ></i>
             </>
           ) : (
             <>
-              <Link to="/login">Login</Link>
-              <Link className="signUp" to="/signUp">
+              <Link to="/shortly_frontend/login">Login</Link>
+              <Link className="signUp" to="/shortly_frontend/signUp">
                 Sign Up
               </Link>
             </>

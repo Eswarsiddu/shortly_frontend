@@ -20,18 +20,9 @@ import { CreateNew } from "./Pages/CreateNew";
 function App() {
   return (
     <Routes>
-      {/* <Route path="/shortly_frontend"> */}
-      {/* <Route
-        path="/shortly_frontend"
-        element={
-          <AuthenticatedRoute>
-            <Home />
-          </AuthenticatedRoute>
-        }
-      /> */}
       <Route element={<NavBar onlyTitle={true} />}>
         <Route
-          path="/login"
+          path="/shortly_frontend/login"
           element={
             <AuthenticatedRoute>
               <Login />
@@ -39,26 +30,35 @@ function App() {
           }
         />
         <Route
-          path="/signUp"
+          path="/shortly_frontend/signUp"
           element={
             <AuthenticatedRoute>
               <SignUp />
             </AuthenticatedRoute>
           }
         />
-        <Route path="/forgetPassword" element={<ForgetPassword />} />
-        <Route path="/firebaseActions" element={<FirebaseActions />} />
-        <Route path="/verificationsend" element={<VerificationSend />} />
         <Route
-          path="/passwordrecoverysend"
+          path="/shortly_frontend/forgetPassword"
+          element={<ForgetPassword />}
+        />
+        <Route
+          path="/shortly_frontend/firebaseActions"
+          element={<FirebaseActions />}
+        />
+        <Route
+          path="/shortly_frontend/verificationsend"
+          element={<VerificationSend />}
+        />
+        <Route
+          path="/shortly_frontend/passwordrecoverysend"
           element={<ResetPasswordMailSend />}
         />
       </Route>
       <Route element={<NavBar />}>
-        <Route path="/create" element={<CreateNew />} />
+        <Route path="/shortly_frontend/create" element={<CreateNew />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route
-          path="/"
+          path="/shortly_frontend/"
           element={
             <AuthenticatedRoute>
               <Home />
@@ -66,7 +66,7 @@ function App() {
           }
         />
         <Route
-          path="/dashboard"
+          path="/shortly_frontend/dashboard"
           element={
             <ProtectedRoute>
               <Dashboard />
@@ -74,7 +74,7 @@ function App() {
           }
         />
         <Route
-          path="/profile"
+          path="/shortly_frontend/profile"
           element={
             <ProtectedRoute>
               <Profile />
@@ -82,8 +82,6 @@ function App() {
           }
         />
       </Route>
-      {/* </Route> */}
-      <ToastContainer />
     </Routes>
   );
 }

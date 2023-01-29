@@ -6,7 +6,8 @@ export function ProtectedRoute({ children }: any) {
   const { currentUser } = useAuth();
   // return <WaitingPage />;
   if (typeof currentUser == "undefined") return <WaitingPage />;
-  else if (currentUser == null) return <Navigate to="/login" />;
+  else if (currentUser == null)
+    return <Navigate to="/shortly_frontend/login" />;
   else if (!currentUser.emailVerified) return <VerifyEmail />;
   return children;
 }

@@ -4,6 +4,6 @@ import { WaitingPage } from "./WaitingPage";
 export function AuthenticatedRoute({ children }: any) {
   const { currentUser } = useAuth();
   if (typeof currentUser == "undefined") return <WaitingPage />;
-  if (currentUser) return <Navigate to="/dashboard" />;
+  if (currentUser) return <Navigate to="/shortly_frontend/dashboard" />;
   return children;
 }

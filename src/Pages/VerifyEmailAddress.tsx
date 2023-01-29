@@ -9,7 +9,7 @@ export function VerifyEmailAddress({ oobCode }: any) {
     <div className="verify-email-address flex-column align-center">
       <i className="fa-solid fa-circle-check check-icon"></i>
       <p>You have successfully verified your account</p>
-      <Link to="/login">Login here</Link>
+      <Link to="/shortly_frontend/login">Login here</Link>
     </div>
   );
 }

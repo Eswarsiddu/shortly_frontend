@@ -21,7 +21,7 @@ export function Profile() {
 
   return (
     <>
-      <Link className="back" to="/dashboard">
+      <Link className="back" to="/shortly_frontend/dashboard">
         <i className="fa-solid fa-caret-left"></i>Dashboard
       </Link>
       <div className="profile">

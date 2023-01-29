@@ -36,7 +36,7 @@ export function CreateNew() {
         setUrlError(false);
         try {
           await createUrl(values, currentUser!.uid);
-          navigate("/dashboard");
+          navigate("/shortly_frontend/dashboard");
         } catch (e) {
           if (e == "serverError") {
             setServerError(true);
@@ -50,7 +50,7 @@ export function CreateNew() {
     });
   return (
     <>
-      <Link to="/dashboard" className="back">
+      <Link to="/shortly_frontend/dashboard" className="back">
         <i className="fa-solid fa-caret-left"></i>
         Back to Dashboard
       </Link>

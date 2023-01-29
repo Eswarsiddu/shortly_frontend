@@ -17,7 +17,7 @@ export function VerifyEmail() {
         onClick={async () => {
           await verifyEmail();
           await logout();
-          navigate("/verificationsend");
+          navigate("/shortly_frontend/verificationsend");
         }}
       >
         Verify Email

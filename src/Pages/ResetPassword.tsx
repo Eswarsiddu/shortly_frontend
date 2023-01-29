@@ -22,7 +22,7 @@ export function ResetPassword({ obbCode }: any) {
           if (checkPasswordConstraints(password)) {
             if (password == cnfPassword) {
               await resetPassword(obbCode, password);
-              navigate("/login");
+              navigate("/shortly_frontend/login");
             } else setConfirmPasswordError(true);
           } else setPasswordError(true);
         }

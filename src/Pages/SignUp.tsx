@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { signUpSchema } from "../Schemas/SignupSchema";
 import "../Styles/Form.css";
 import { PulseLoader } from "react-spinners";
+import { BACKEND_URL_HTTP } from "../utils/Utils";
 
 export function SignUp() {
   const [passwordHide, setPasswordHide] = useState(true);
@@ -36,7 +37,7 @@ export function SignUp() {
       setLoading(true);
       setEmailError(false);
       await register(email, password, fullName);
-      navigate("/dashboard");
+      navigate("/shortly_frontend/dashboard");
     } catch ({ code }) {
       setEmailError(true);
       setLoading(false);
@@ -46,7 +47,7 @@ export function SignUp() {
     <>
       <h3 className="heading">Sign up and start shortening</h3>
       <p className="redirect">
-        Already have an account? <Link to="/login">Login</Link>
+        Already have an account? <Link to="/shortly_frontend/login">Login</Link>
       </p>
       <form className="flex-column align-center" onSubmit={handleSubmit}>
         <div className="input-block flex-column">
@@ -133,11 +134,19 @@ export function SignUp() {
       <p className="footer m-0">
         By signing in with an account, you agree to Shortly's
         <br />
-        <Link to="/pages/terms" className="anchor" target="_blank">
+        <Link
+          to={`${BACKEND_URL_HTTP}/pages/terms`}
+          className="anchor"
+          target="_blank"
+        >
           Terms of Services
         </Link>
         ,
-        <Link to="/pages/privacy" className="anchor" target="_blank">
+        <Link
+          to={`${BACKEND_URL_HTTP}/pages/privacy`}
+          className="anchor"
+          target="_blank"
+        >
           Privacy Policy
         </Link>
         .

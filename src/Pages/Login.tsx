@@ -34,7 +34,7 @@ function Login() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate("/dashboard");
+      navigate("/shortly_frontend/dashboard");
     } catch ({ code }: any) {
       if (code == "auth/wrong-password") setPasswordError(true);
       else if (code == "auth/user-not-found") setEmailError(true);
@@ -47,7 +47,8 @@ function Login() {
     <>
       <h3 className="heading">Login and start sharing</h3>
       <p className="redirect">
-        don't have an account? <Link to="/signUp">Create one</Link>
+        don't have an account?{" "}
+        <Link to="/shortly_frontend/signUp">Create one</Link>
       </p>
       <form className="flex-column align-center" onSubmit={handleSubmit}>
         <div className="input-block flex-column">
@@ -92,7 +93,7 @@ function Login() {
             <p className="form-error m-0">Incorrect password</p>
           )}
         </div>
-        <Link to="/forgetPassword">Forget Password</Link>
+        <Link to="/shortly_frontend/forgetPassword">Forget Password</Link>
         {serverError && (
           <p className="form-error m-0">Please try after some time</p>
         )}

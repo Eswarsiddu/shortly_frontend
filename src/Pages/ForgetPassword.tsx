@@ -24,12 +24,12 @@ export function ForgetPassword() {
       />
       {emailError != "" && <p className="error m-0">{emailError}</p>}
       <button
-      className="recover-password"
+        className="recover-password"
         onClick={async () => {
           setEmailError("");
           try {
             await forgotPassword(email);
-            navigate("/passwordrecoverysend");
+            navigate("/shortly_frontend/passwordrecoverysend");
           } catch (e) {
             setEmailError("Email not found");
           }
