@@ -25,7 +25,7 @@ export function NavBar({ onlyTitle = false }) {
         </div>
         {/*
             //TODO:REMOVE p position in production
-            */}
+            
         <p id="position">
           <button
             onClick={() => {
@@ -37,6 +37,7 @@ export function NavBar({ onlyTitle = false }) {
           </button>
           w:{width} h:{height}
         </p>
+        */}
         {!onlyTitle &&
           (typeof currentUser == "undefined" ? null : currentUser ? (
             <>

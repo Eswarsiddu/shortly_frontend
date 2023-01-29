@@ -18,7 +18,7 @@ export function Dashboard() {
 
   function nextPage() {
     if (loading || !hasMore) return;
-    setLoading(true);
+    // setLoading(true);
     setPageNo((prev) => prev + 1);
   }
 
@@ -27,7 +27,7 @@ export function Dashboard() {
       ({ _data, _hasMore }) => {
         setHasMore(_hasMore);
         setUrlsData((prev) => (pageNo != 1 ? [...prev, ..._data] : _data));
-        setLoading(false);
+        // setLoading(false);
       }
     );
   };
@@ -36,7 +36,7 @@ export function Dashboard() {
 
   const resetData = () => {
     inputRef.current!.value = "";
-    setLoading(true);
+    // setLoading(true);
     if (pageNo != 1) {
       setPageNo(1);
     } else {
@@ -53,7 +53,14 @@ export function Dashboard() {
   };
 
   useEffect(() => {
-    loadData();
+    setLoading(true);
+    getUrls(pageNo, uid, inputRef.current?.value.trim() as string).then(
+      ({ _data, _hasMore }) => {
+        setHasMore(_hasMore);
+        setUrlsData((prev) => (pageNo != 1 ? [...prev, ..._data] : _data));
+        setLoading(false);
+      }
+    );
     function handleResize() {
       console.log("resized");
       setWidth(window.innerWidth);

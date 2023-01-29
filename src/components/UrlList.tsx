@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../Styles/UrlList.css";
 import { useInView } from "react-intersection-observer";
 import { getDate, getShortUrl } from "../utils/Utils";
+import { PropagateLoader } from "react-spinners";
 export function UrlList({
   urlsData,
   setCurrentUrlIndex: selectUrl,
@@ -23,7 +24,7 @@ export function UrlList({
     },
   });
 
-  if (loading) return <p>loading</p>;
+  if (loading) return <PropagateLoader color="#36d7b7" />;
 
   return (
     <div className="url-list">

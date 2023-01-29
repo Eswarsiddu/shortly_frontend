@@ -1,0 +1,11 @@
+.waiting-page {
+  height: 100%;
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 
+.waiting-page  * {
+  margin: auto;
+} */
