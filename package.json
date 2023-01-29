@@ -1,10 +1,13 @@
 {
+  "homepage": "http://Eswarsiddu.github.io/shortly_frontend",
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
