@@ -21,14 +21,14 @@ function App() {
   return (
     <Routes>
       {/* <Route path="/shortly_frontend"> */}
-      <Route
+      {/* <Route
         path="/shortly_frontend"
         element={
           <AuthenticatedRoute>
             <Home />
           </AuthenticatedRoute>
         }
-      />
+      /> */}
       <Route element={<NavBar onlyTitle={true} />}>
         <Route
           path="/login"
