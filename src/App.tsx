@@ -20,61 +20,69 @@ import { CreateNew } from "./Pages/CreateNew";
 function App() {
   return (
     <Routes>
-      <Route path="/shortly_frontend">
-        <Route element={<NavBar onlyTitle={true} />}>
-          <Route
-            path="/login"
-            element={
-              <AuthenticatedRoute>
-                <Login />
-              </AuthenticatedRoute>
-            }
-          />
-          <Route
-            path="/signUp"
-            element={
-              <AuthenticatedRoute>
-                <SignUp />
-              </AuthenticatedRoute>
-            }
-          />
-          <Route path="/forgetPassword" element={<ForgetPassword />} />
-          <Route path="/firebaseActions" element={<FirebaseActions />} />
-          <Route path="/verificationsend" element={<VerificationSend />} />
-          <Route
-            path="/passwordrecoverysend"
-            element={<ResetPasswordMailSend />}
-          />
-        </Route>
-        <Route element={<NavBar />}>
-          <Route path="/create" element={<CreateNew />} />
-          <Route path="*" element={<NotFoundPage />} />
-          <Route
-            path="/"
-            element={
-              <AuthenticatedRoute>
-                <Home />
-              </AuthenticatedRoute>
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-        </Route>
+      {/* <Route path="/shortly_frontend"> */}
+      <Route
+        path="/shortly_frontend"
+        element={
+          <AuthenticatedRoute>
+            <Home />
+          </AuthenticatedRoute>
+        }
+      />
+      <Route element={<NavBar onlyTitle={true} />}>
+        <Route
+          path="/login"
+          element={
+            <AuthenticatedRoute>
+              <Login />
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/signUp"
+          element={
+            <AuthenticatedRoute>
+              <SignUp />
+            </AuthenticatedRoute>
+          }
+        />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/firebaseActions" element={<FirebaseActions />} />
+        <Route path="/verificationsend" element={<VerificationSend />} />
+        <Route
+          path="/passwordrecoverysend"
+          element={<ResetPasswordMailSend />}
+        />
       </Route>
+      <Route element={<NavBar />}>
+        <Route path="/create" element={<CreateNew />} />
+        <Route path="*" element={<NotFoundPage />} />
+        <Route
+          path="/"
+          element={
+            <AuthenticatedRoute>
+              <Home />
+            </AuthenticatedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+      </Route>
+      {/* </Route> */}
       <ToastContainer />
     </Routes>
   );
