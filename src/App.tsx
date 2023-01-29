@@ -19,8 +19,8 @@ import { CreateNew } from "./Pages/CreateNew";
 
 function App() {
   return (
-    <>
-      <Routes>
+    <Routes>
+      <Route path="/shortly_frontend">
         <Route element={<NavBar onlyTitle={true} />}>
           <Route
             path="/login"
@@ -74,9 +74,9 @@ function App() {
             }
           />
         </Route>
-      </Routes>
+      </Route>
       <ToastContainer />
-    </>
+    </Routes>
   );
 }
 
