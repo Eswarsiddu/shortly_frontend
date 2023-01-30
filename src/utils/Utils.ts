@@ -4,7 +4,7 @@ export const BACKEND_URL = "shortly-jn8h.onrender.com";
 // export const BACKEND_URL_HTTP: string = "http://127.0.0.1:8000";
 export const BACKEND_URL_HTTP: string = "https://shortly-jn8h.onrender.com";
 export const PAGE_URL = "shortly.com";
-export const DATA_LENGTH_SIZE = 8;
+export const DATA_LENGTH_SIZE = 15;
 export const passwordRegEx =
   /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 export function checkPasswordConstraints(password: string) {
