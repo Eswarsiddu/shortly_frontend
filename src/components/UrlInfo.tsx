@@ -52,7 +52,7 @@ export const UrlInfo = ({ urlData, loading }: any) => {
               level="M"
               includeMargin={true}
               imageSettings={{
-                src: "/shortly_icon.png",
+                src: "shortly_icon.png",
                 x: undefined,
                 y: undefined,
                 height: 35,
