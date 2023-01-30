@@ -1,5 +1,8 @@
-export const BACKEND_URL = "127.0.0.1:8000";
-export const BACKEND_URL_HTTP: string = "http://127.0.0.1:8000";
+// export const BACKEND_URL = "127.0.0.1:8000";
+export const BACKEND_URL = "shortly-jn8h.onrender.com";
+// https://shortly-jn8h.onrender.com
+// export const BACKEND_URL_HTTP: string = "http://127.0.0.1:8000";
+export const BACKEND_URL_HTTP: string = "https://shortly-jn8h.onrender.com";
 export const PAGE_URL = "shortly.com";
 export const DATA_LENGTH_SIZE = 8;
 export const passwordRegEx =
